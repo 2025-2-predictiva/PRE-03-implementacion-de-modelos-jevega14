@@ -1,14 +1,15 @@
 import numpy as np
-from tqdm import tqdm
+from tqdm import tqdm  # type: ignore
 
 class LinearRegression:
     """Basic linear regression implementation."""
+
 
     def __init__(self, num_epochs=100, learning_rate=0.01):
         self.coefs_ = None
         self.intercept_ = None
         self.num_epochs = num_epochs
-        self.learning_rate = learning_rate
+        self.learning_rate = learning_rate    
 
     def fit(self, X, y):
         """Fit the model using X, y."""
@@ -22,7 +23,7 @@ class LinearRegression:
             y_pred = np.matmul(X, self.coefs_) + self.intercept_
 
             # Compute the gradient of the intercept
-            gradient_intercept_per_row = np.sum(-2 * (y - y_pred))
+            gradient_intercept_per_row = -2 * (y - y_pred)
             gradient_intercept_ = np.sum(gradient_intercept_per_row)
 
             # Compute the gradient of the coefficients
@@ -32,3 +33,9 @@ class LinearRegression:
             # Update the coefficients
             self.coefs_ -= self.learning_rate * gradient_coefs_
             self.intercept_ -= self.learning_rate * gradient_intercept_
+
+
+
+    def predict(self, X):
+        """Predict the target for the provided data."""
+        return np.matmul(X, self.coefs_) + self.intercept_

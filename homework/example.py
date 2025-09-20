@@ -1,3 +1,4 @@
+"""Use example"""
 
 # pylint: disable=import-error
 
